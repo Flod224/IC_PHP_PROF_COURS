@@ -87,7 +87,10 @@ class ProfCoursTest extends TestCase
             new Cours("Cours3", "3", 5),       // idcours = 3
             new Cours("Cours4", "2", 3),       // idcours = 4
             new Cours("Cours5", "3", 3),       // idcours = 5
-            new Cours("Cours6", "2", 4),       // idcours = 6
+            new Cours("Cours6", "2", 6),       // idcours = 6
+            new Cours("Cours7", "2", 4),       // idcours = 7
+            new Cours("Cours8", "2", 7),       // idcours = 8
+            new Cours("Cours9", "2", 10),       // idcours = 9
 
 
             /**
@@ -298,8 +301,8 @@ class ProfCoursTest extends TestCase
 
 
         // Avec des ID
-        $idProf = 10;
-        $idCours =6;
+        $idProf = 2;
+        $idCours =3;
         // Prof
         $prof = Prof::printOne($conn, $idProf);
         $prof_str = $prof->__toString();
@@ -410,7 +413,7 @@ class ProfCoursTest extends TestCase
 
         // ############################### - Mise à jour Cours - ####################################
         // Création d'un objet Cours avec les nouvelles valeurs
-        $cours = new Cours($this->intitule, $this->duree, 6);
+        $cours = new Cours($this->intitule, $this->duree, 3);
 
         // Mise à jour du premier enregistrement de la table Cours
         $valCours = $cours->updateOne($conn);
