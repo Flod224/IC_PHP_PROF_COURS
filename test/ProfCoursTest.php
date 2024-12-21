@@ -13,10 +13,10 @@ class ProfCoursTest extends TestCase
     const SQL_FILE = "db.sql";
 
     //  #######    CHANGE THIS TO HAVE CREDENTIAL OF YOUR DATABASE       ##########
-   const DB_USER = "root"; // Utilisateur par défaut pour WAMP Server
-   const DB_PASS = "";     // Mot de passe vide par défaut pour WAMP Server
-   const DB_NAME = "test_java"; // Nom de votre base de données
-   const DB_HOST = "127.0.0.1"; // Adresse locale pour accéder au serveur MySQL (ou utilisez "localhost")
+    const DB_USER = "user01";
+    const DB_PASS = "user01";
+    const DB_NAME = "user01_test_php";
+    const DB_HOST = "192.168.250.3";
 
     public static $conn = null;
     // Prof
@@ -384,37 +384,65 @@ class ProfCoursTest extends TestCase
      */
     public function testUpdateOne_2()
     {
-        print __METHOD__."\n";
+        print __METHOD__ . "\n";
         $conn = $this->getConnection();
-        // ############################### - ####################################"
-        // Sans Id. - Le premier enregistrement sera traiter à chaque fois (ce que retourne la méthode getOneId)
-        // Prof
+
+        // ############################### - Mise à jour Prof - ####################################
+        // Sans Id. - Le premier enregistrement sera traité à chaque fois (ce que retourne la méthode getOneId)
+
+        // Création d'un objet Prof avec les nouvelles valeurs
         $prof = new Prof($this->nom, $this->prenom, $this->date, $this->lieu);
-        $val = $prof->updateOne($conn);
+
+        // Mise à jour du premier enregistrement de la table Prof
+        $valProf = $prof->updateOne($conn);
+
+        // Récupération du Prof mis à jour depuis la base
         $expected_prof_str = $prof->__toString();
         $record_prof = Prof::printOne($conn);
-        $this->assertEquals($expected_prof_str, $record_prof->__toString(), "Update du 1e prof ...\n");
-        $this->assertTrue($val, "Update du 1e prof ...\n");
 
-        // Cours
+        // Vérification : Les données mises à jour doivent correspondre à ce qui est attendu
+        $this->assertEquals(
+            $expected_prof_str,
+            $record_prof->__toString(),
+            "Erreur : Les données du Prof mis à jour ne correspondent pas aux attentes."
+        );
+        $this->assertTrue($valProf, "Mise à jour du 1er Prof effectuée avec succès.");
+
+        // ############################### - Mise à jour Cours - ####################################
+        // Création d'un objet Cours avec les nouvelles valeurs
         $cours = new Cours($this->intitule, $this->duree, 10);
-        $val = $cours->updateOne($conn);
-        $expected_cours_str= $cours->__toString();
-        $record_cours = Cours::printOne($conn);
-        $this->assertEquals($expected_cours_str, $record_cours->__toString(), "Update du 1e cours  ...\n");
-        $this->assertTrue($val, "Update du 1e cours ...\n");
 
-        print "########## - LISTE DES PROFS - APRES UPDATE DU 1e PROF  ########## \n";
-        foreach ( $record_prof_a = Prof::printAll($conn) as $record_prof ) {
+        // Mise à jour du premier enregistrement de la table Cours
+        $valCours = $cours->updateOne($conn);
+
+        // Récupération du Cours mis à jour depuis la base
+        $expected_cours_str = $cours->__toString();
+        $record_cours = Cours::printOne($conn);
+
+        // Vérification : Les données mises à jour doivent correspondre à ce qui est attendu
+        $this->assertEquals(
+            $expected_cours_str,
+            $record_cours->__toString(),
+            "Erreur : Les données du Cours mis à jour ne correspondent pas aux attentes."
+        );
+        $this->assertTrue($valCours, "Mise à jour du 1er Cours effectuée avec succès.");
+
+        // ############################### - Affichage après mises à jour - #########################
+        // Afficher la liste des Profs après la mise à jour
+        print "########## - LISTE DES PROFS - APRES UPDATE DU 1er PROF ########## \n";
+        foreach ($record_prof_a = Prof::printAll($conn) as $record_prof) {
             print $record_prof;
         }
         print "################################################################\n\n";
-        print "@@@@@@@@@@@@@ - LISTE DES COURS - APRES UPDATE DU 1e COURS @@@@@@@@@@@@@ \n";
-        foreach( $record_cours_a = Cours::printAll($conn) as $record_cours ) {
+
+        // Afficher la liste des Cours après la mise à jour
+        print "@@@@@@@@@@@@@ - LISTE DES COURS - APRES UPDATE DU 1er COURS @@@@@@@@@@@@@ \n";
+        foreach ($record_cours_a = Cours::printAll($conn) as $record_cours) {
             print $record_cours;
         }
         print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n";
     }
+
 
     /**
      * Suppression d'un enregistrement.
