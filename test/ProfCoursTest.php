@@ -13,10 +13,10 @@ class ProfCoursTest extends TestCase
     const SQL_FILE = "db.sql";
 
     //  #######    CHANGE THIS TO HAVE CREDENTIAL OF YOUR DATABASE       ##########
-   const DB_USER = "root"; // Utilisateur par défaut pour WAMP Server
-   const DB_PASS = "";     // Mot de passe vide par défaut pour WAMP Server
-   const DB_NAME = "test_java"; // Nom de votre base de données
-   const DB_HOST = "127.0.0.1"; // Adresse locale pour accéder au serveur MySQL (ou utilisez "localhost")
+    const DB_USER = "user01";
+    const DB_PASS = "user01";
+    const DB_NAME = "user01_test_php";
+    const DB_HOST = "192.168.250.3";
 
     public static $conn = null;
     // Prof
