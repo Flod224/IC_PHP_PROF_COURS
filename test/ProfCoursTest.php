@@ -337,7 +337,7 @@ class ProfCoursTest extends TestCase
 
         // Avec Id en dur.
         $idProf = 10;
-        $idCours = 6;
+        $idCours = 9;
 
         // Prof
         $prof = new Prof($this->nom, $this->prenom, $this->date, $this->lieu);
