@@ -336,7 +336,7 @@ class ProfCoursTest extends TestCase
         $conn = $this->getConnection();
 
         // Avec Id en dur.
-        $idProf = 2;
+        $idProf = 6;
         $idCours =3;
 
         // Prof
