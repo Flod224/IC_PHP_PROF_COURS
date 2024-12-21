@@ -90,7 +90,7 @@ class ProfCoursTest extends TestCase
             new Cours("Cours6", "2", 6),       // idcours = 6
             new Cours("Cours7", "2", 4),       // idcours = 7
             new Cours("Cours8", "2", 7),       // idcours = 8
-            new Cours("Cours9", "2", 10),       // idcours = 9
+         
 
 
             /**
